@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend with Backend API</title>
+</head>
+<body>
+    <h1>Data from Backend API</h1>
+    <div id="data"></div>
+
+    <script>
+        // Fetch data from backend API
+        function fetchData() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8080/api/data", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    var dataDiv = document.getElementById("data");
+                    dataDiv.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+                }
+            };
+            xhr.send();
+        }
+
+        // Call the fetchData function when the page loads
+        window.onload = fetchData;
+    </script>
+</body>
+</html>
